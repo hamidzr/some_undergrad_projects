@@ -1,0 +1,94 @@
+<html>
+<head>
+	<title>Fifo CalC by Hamid Zare</title>
+	<script type="text/javascript" src="jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<h2>iAlghorithm Fifo > Dars System Amel > Ostad Faraji [Abane 92]</h2>
+<p>in barname dar moghabele voroode chizi mahdood nashode pas baraye ejraye sahih ba deghat faghat adad vared konid</p>
+<form>
+	Tedade Adad Process ha: <input id="tedad" type="number" name="tedad" min="1" step="1" autofocus required/><br>
+	<input type="text" name="a1" style="visibility: hidden;" /><br>
+	
+</form>
+<button id="butt" type="button">Click Me!</button>
+<p>process ha ra hatman be tartibe zamane vorood vared konid</p>
+<div id="procs">
+</div> <!-- end of procs -->
+<button id="calc" type="button">Hesab Kon</button><br>
+<div id="results">
+	
+</div> <!-- end of results -->
+<script type="text/javascript">
+$(document).ready(function(){
+	console.log('salam');
+	alert('dar textbox addad bezanid');
+	var m = 0;
+	var arrPT = [];
+	var arrPS = [];
+	$("#butt").on('click',function(){
+		$(this).css("visibility","hidden");
+		console.log('shod');
+		var n = parseInt($('#tedad').val());
+		m = n;
+		
+		for (var i = 1; i <= m; i++) {
+			$('#procs').append('Process '+i+' :Vorud : <input type="text" class="start" value="1" name="'+i+'"/> --  Zaman morede niyaz <input type="text" class="time" value="3" name="'+i+'"/> <br>');
+		};
+
+		//$('#procs input[class="time"]').filter(function(index){
+		//		return index === 1 }).css( "background-color", "red" );
+
+	}); // butt click end
+
+		var w8 = 0;
+		var baz = 0;
+	$('#calc').on('click',function(){
+		console.log('meghdare m : '+m);
+		for (var i = 0; i < m; i++ ){
+
+			arrPT[i] = parseInt($('#procs input[class="time"]').filter(function(index){
+				return index === i ;
+			}).val());
+		}; // end of for arrPT
+		for (var i = 0; i < m; i++ ){
+			arrPS[i] = parseInt($('#procs input[class="start"]').filter(function(index){
+				return index === i ;
+			}).val());
+		}; // end of for arrPS
+			console.log(arrPT);
+			console.log(arrPS);
+			// ghesmate mohasebe time kolli
+		var t = arrPS[0] + arrPT[0];
+		console.log('t ghable for '+ t);
+		for(var i = 1; i < m; i++) {
+			if (arrPS[i] <= t){
+				w8 = w8 + t - arrPS[i];
+				baz = baz + arrPT[i] + (t - arrPS[i]);
+				console.log('entezare ke tu true ad mishe' + (t - arrPS[i]));
+				t = t + arrPT[i];
+				// console.log('true run shod');
+				// console.log(arrPS[i]);
+
+			} 
+			else{
+				baz = baz + arrPT[i];
+				// console.log(arrPS[i]);
+				// console.log(t);
+				t= t + (t-arrPS[i])+arrPT[i];
+				console.log('run shod else');
+			}
+
+		};
+		console.log('zamane entezar = '+w8/m);
+		console.log('zamane bazgasht = '+baz/m);
+		console.log(t); //end mohasebe t
+		$('div#results').append('zamane entezar = '+w8/m +'<br> zamane bazgasht = '+baz/m );
+	}); // calc click end */
+
+
+});
+	</script>
+	<!-- 900575344 -->
+</body>
+</html>
